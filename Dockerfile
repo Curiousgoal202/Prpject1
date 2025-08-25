@@ -1,14 +1,11 @@
-# Use Nginx as the base image
 FROM nginx:alpine
 
-# Remove default nginx html
+# Remove default nginx static files
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy your HTML files into container
-COPY ./html/ /usr/share/nginx/html/
+# Copy all files from repo root into nginx html directory
+COPY . /usr/share/nginx/html/
 
-# Expose port 80
 EXPOSE 80
 
-# Start Nginx (already default in base image)
 CMD ["nginx", "-g", "daemon off;"]
